@@ -1,7 +1,9 @@
 import React, {useCallback, useState} from 'react';
 import ReactJson from 'react-json-view';
 import './style.scss';
-import {SendTransactionRequest, useTonConnectUI, useTonWallet} from "@tonconnect/ui-react";
+import {SendTransactionRequest, toUserFriendlyAddress, useTonAddress, useTonConnectUI, useTonWallet} from "@tonconnect/ui-react";
+import {Address} from "@ton/core";
+import { TxTestCasesView } from '../TxTestCases/TxTestCasesView';
 
 // In this example, we are using a predefined smart contract state initialization (`stateInit`)
 // to interact with an "EchoContract". This contract is designed to send the value back to the sender,
@@ -52,6 +54,8 @@ export function TxForm() {
 			) : (
 				<button onClick={() => tonConnectUi.openModal()}>Connect wallet to send the transaction</button>
 			)}
+
+			{wallet ? <TxTestCasesView/> : null}
 		</div>
 	);
 }
