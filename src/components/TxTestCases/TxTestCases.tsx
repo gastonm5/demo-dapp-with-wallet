@@ -18,7 +18,7 @@ export const TxTestCases: TxTestCase[] = [
     {
         title: "’validUntil’ is less than now() + 5 minutes",
         tx: (params) => ({
-            "validUntil": Math.floor(Date.now() / 1000) - (6 * 60),
+            "validUntil": Math.floor(Date.now() / 1000) + (3 * 60),
             "messages": [{
                 "address": "EQCKWpx7cNMpvmcN5ObM5lLUZHZRFKqYA4xmw9jOry0ZsF9M",
                 "amount": "5000000",
@@ -30,7 +30,7 @@ export const TxTestCases: TxTestCase[] = [
     {
         title: "’validUntil’ is more than now() + 5 minutes",
         tx: (params) => ({
-            "validUntil":  Math.floor(Date.now() / 1000) + (5 * 60),
+            "validUntil":  Math.floor(Date.now() / 1000) + (6 * 60),
             "messages": [{
                 "address": "EQCKWpx7cNMpvmcN5ObM5lLUZHZRFKqYA4xmw9jOry0ZsF9M",
                 "amount": "5000000",
@@ -42,6 +42,18 @@ export const TxTestCases: TxTestCase[] = [
     {
         title: "without ’validUntil’",
         tx: (params) => ({
+            "messages": [{
+                "address": "EQCKWpx7cNMpvmcN5ObM5lLUZHZRFKqYA4xmw9jOry0ZsF9M",
+                "amount": "5000000",
+                "stateInit": "te6cckEBBAEAOgACATQCAQAAART/APSkE/S88sgLAwBI0wHQ0wMBcbCRW+D6QDBwgBDIywVYzxYh+gLLagHPFsmAQPsAlxCarA==",
+                "payload": "te6ccsEBAQEADAAMABQAAAAASGVsbG8hCaTc/g=="
+            }]
+        })
+    },
+    {
+        title: "outdated ‘validUntil’",
+        tx: (params) => ({
+            "validUntil": Math.floor(Date.now() / 1000) - (10 * 60),
             "messages": [{
                 "address": "EQCKWpx7cNMpvmcN5ObM5lLUZHZRFKqYA4xmw9jOry0ZsF9M",
                 "amount": "5000000",
@@ -74,6 +86,7 @@ export const TxTestCases: TxTestCase[] = [
             }]
         })
     },
+    
     {
         title: "Empty messages array",
         tx: (params) => ({
